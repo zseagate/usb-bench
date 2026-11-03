@@ -3,6 +3,7 @@
 这里记录所有实测过的 U 盘/移动固态。等级标准见 [docs/standards.md](../docs/standards.md)。
 
 > 公开归档省略序列号；原始报告中的序列号已替换为“已省略”。
+> `/dev/sdX` 是测试时的设备名，换机器/重新插拔会变化；请以型号、容量和日期区分。
 > 所有数据均来自 `usb_bench.py` 的 full 模式（Kingston 另有 quick 对照）。
 
 ## 汇总
