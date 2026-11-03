@@ -197,6 +197,11 @@ git clone https://github.com/zseagate/usb-bench.git \
 
 案例详情：[examples/asolid-128gb.md](examples/asolid-128gb.md)、[examples/kingston-dt128.md](examples/kingston-dt128.md)。
 
+原始报告：
+
+- [Kingston quick 报告](examples/reports/kingston-datatraveler-3.0-quick.md)
+- [Kingston full 报告](examples/reports/kingston-datatraveler-3.0-full.md)
+
 ---
 
 ## License
