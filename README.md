@@ -32,6 +32,27 @@
 
 ---
 
+## 标准与历史
+
+- **[随身盘标准档](docs/standards.md)**：S/A/B/C/D 等级、好盘/差盘特征、什么程度可以当随身盘
+- **[历史评测归档](evaluations/README.md)**：所有实测盘、Tier、原始报告
+- **[history.csv](evaluations/history.csv)**：机器可读的历史数据
+
+当前归档摘要：
+
+| 盘 | 顺序写 | 4K QD1 | fsync | Tier | 建议 |
+|---|---:|---:|---:|---|---|
+| HIKSEMI 128G | 198.91 | 33.58 | 1.28 | **S** | 推荐 |
+| LanKxin 59G | 98.20 | 22.77 | 0.49 | **B** | 轻量 |
+| USB Flash Drive 57.6G | 58.96 | 37.58* | 0.49 | **B** | 轻量 |
+| SanDisk 3.2Gen1 115.7G | 17.10 | 19.04* | 0.62 | **C** | 应急 |
+| Kingston DataTraveler 3.0 | 9.99 | 0.81 | 0.58 | **D** | 不建议 |
+| ASolid 128G | 1.87 | 0.27 | 0.13 | **D** | 不建议 |
+
+\* exFAT 缓冲影响，参考性较弱。
+
+---
+
 ## 安装
 
 ```bash
@@ -128,7 +149,7 @@ sudo umount /mnt/usbtest
 - **write through / 写缓存不支持**：小文件写入明显偏慢
 - **顺序读 < 100 MB/s**：可能不是 USB 3.x 口/线材
 
-详细标准见 [docs/scoring.md](docs/scoring.md)。
+工具判定是粗筛；更细的随身盘等级（S/A/B/C/D）见 [docs/standards.md](docs/standards.md)。详细粗筛阈值见 [docs/scoring.md](docs/scoring.md)。
 
 ---
 
@@ -190,17 +211,27 @@ git clone https://github.com/zseagate/usb-bench.git \
 
 ## 参考结果
 
-| 设备 | 顺序写 | 4K 写 QD1 | fsync | 顺序读 | 协议 | 结论 |
-|---|---:|---:|---:|---:|---|---|
-| ASolid 128GB USB 3.0 | 1.87 MB/s | 0.27 MB/s | 0.13 MB/s | 200 MB/s | BOT, write through | **FAIL** |
-| Kingston DataTraveler 3.0 115.5GB | 9.99 MB/s | 0.81 MB/s | 0.58 MB/s | 53.7 MB/s | BOT, write through | **FAIL** |
+完整历史与 Tier 见 [evaluations/README.md](evaluations/README.md)，标准见 [docs/standards.md](docs/standards.md)。
+
+| 设备 | Tier | 顺序写 | 4K 写 QD1 | fsync | 顺序读 | 协议 | 结论 |
+|---|---|---:|---:|---:|---:|---|---|
+| HIKSEMI 128G | **S** | 198.91 MB/s | 33.58 MB/s | 1.28 MB/s | 311 MB/s | UAS, write back | 推荐 |
+| LanKxin 59G | **B** | 98.20 MB/s | 22.77 MB/s | 0.49 MB/s | 305 MB/s | UAS, write back | 轻量 |
+| USB Flash Drive 57.6G | **B** | 58.96 MB/s | 37.58 MB/s* | 0.49 MB/s | 152 MB/s | BOT, write through | 轻量 |
+| SanDisk 3.2Gen1 115.7G | **C** | 17.10 MB/s | 19.04 MB/s* | 0.62 MB/s | 130 MB/s | BOT, write through | 应急 |
+| Kingston DataTraveler 3.0 115.5G | **D** | 9.99 MB/s | 0.81 MB/s | 0.58 MB/s | 53.7 MB/s | BOT, write through | **FAIL** |
+| ASolid 128GB USB 3.0 | **D** | 1.87 MB/s | 0.27 MB/s | 0.13 MB/s | 200 MB/s | BOT, write through | **FAIL** |
+
+\* exFAT 不支持 O_DIRECT 时走缓冲，4K 写可能被页缓存抬高。
 
 案例详情：[examples/asolid-128gb.md](examples/asolid-128gb.md)、[examples/kingston-dt128.md](examples/kingston-dt128.md)。
 
 原始报告：
 
-- [Kingston quick 报告](examples/reports/kingston-datatraveler-3.0-quick.md)
-- [Kingston full 报告](examples/reports/kingston-datatraveler-3.0-full.md)
+- [HIKSEMI + LanKxin](evaluations/reports/2026-11-03-batch-hiksimi-lankxin.md)
+- [USB Flash Drive + SanDisk](evaluations/reports/2026-11-03-batch-usbflash-sandisk.md)
+- [Kingston quick](evaluations/reports/2026-11-03-kingston-datatraveler-3.0-quick.md) / [full](evaluations/reports/2026-11-03-kingston-datatraveler-3.0-full.md)
+- [ASolid 128GB](evaluations/reports/2026-11-02-asolid-128gb.md)
 
 ---
 

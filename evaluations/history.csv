@@ -1,0 +1,7 @@
+date,device,model,capacity_gib,seq_read_mbs,seq_write_mbs,rand4k_read_iops,rand4k_write_qd1_mbs,rand4k_write_qd32_mbs,fsync4k_mbs,protocol,write_cache,fstype,mode,tier,verdict,notes
+2026-11-03,/dev/sdb,HIKSEMI 128G,119.2,311.06,198.91,35421.8,33.58,33.59,1.28,UAS,write back,btrfs,full,S,GOOD,"recommended; UAS + write back; strong sustained write"
+2026-11-03,/dev/sdc,LanKxin,59.0,304.76,98.20,31706.7,22.77,26.38,0.49,UAS,write back,btrfs,full,B,GOOD,"seq/4K meet A but fsync 0.49 caps at B; light use"
+2026-11-03,/dev/sdb,USB Flash Drive,57.6,151.84,58.96,943.1,37.58,8.23,0.49,BOT,write through,exfat,full,B,GOOD,"exFAT; 94% full; 4K QD1 likely cache-inflated; fsync 0.49"
+2026-11-03,/dev/sdc,SanDisk 3.2Gen1,115.7,129.62,17.10,1843.6,19.04,28.63,0.62,BOT,write through,exfat,full,C,WARN,"seq write 17.1; exFAT 4K likely cache-inflated; live/maintenance"
+2026-11-03,/dev/sdb,Kingston DataTraveler 3.0,115.5,53.7,9.99,,0.81,0.81,0.58,BOT,write through,ext4,full,D,FAIL,"full 9.99/0.81; quick 12.78/0.83 WARN; do not build"
+2026-11-02,/dev/sdb,ASolid 128GB,117.2,200,1.87,,0.27,0.27,0.13,BOT,write through,ext4,full,D,FAIL,"read 200 but write 1.87; hdparm -W1 unsupported; do not build"

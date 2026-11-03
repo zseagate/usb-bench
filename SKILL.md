@@ -66,6 +66,22 @@ Requirements: `fio`, `python3`, root, `util-linux`; `hdparm` and `usbutils` are 
 
 Reports are written to `reports/` as Markdown, JSON, and CSV. The script also prints a Markdown report.
 
+## Standards & history
+
+- [docs/standards.md](docs/standards.md) — S/A/B/C/D portable tiers, good/bad drive characteristics, and "how good is good enough"
+- [evaluations/README.md](evaluations/README.md) — historical results and raw reports
+- After a test, append the metrics to `evaluations/history.csv` if you maintain the archive.
+
+The tool's `GOOD/PASS/WARN/FAIL` is a coarse screen. The **Tier (S/A/B/C/D)** in the standard is the usage-oriented decision, especially when fsync is borderline:
+
+| Tier | Sequential write | 4K QD1 | fsync | Use |
+|---|---:|---:|---:|---|
+| S | ≥ 150 MB/s | ≥ 20 MB/s | ≥ 1.0 MB/s | long-term portable dev |
+| A | ≥ 60 MB/s | ≥ 8 MB/s | ≥ 0.7 MB/s | daily portable |
+| B | ≥ 25 MB/s | ≥ 3 MB/s | ≥ 0.5 MB/s | light/emergency |
+| C | ≥ 10 MB/s | ≥ 1 MB/s | ≥ 0.3 MB/s | live/maintenance only |
+| D | below | below | - | do not use as a boot drive |
+
 ## Thresholds
 
 | Verdict | Sequential write | 4K random write QD1 | Meaning |

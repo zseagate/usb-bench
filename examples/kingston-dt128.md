@@ -32,5 +32,5 @@
 
 ## 原始报告
 
-- [quick 报告](reports/kingston-datatraveler-3.0-quick.md)（12.78 MB/s / 0.83 MB/s）
-- [full 报告](reports/kingston-datatraveler-3.0-full.md)（9.99 MB/s / 0.81 MB/s）
+- [quick 报告](../evaluations/reports/2026-11-03-kingston-datatraveler-3.0-quick.md)（12.78 MB/s / 0.83 MB/s）
+- [full 报告](../evaluations/reports/2026-11-03-kingston-datatraveler-3.0-full.md)（9.99 MB/s / 0.81 MB/s）
